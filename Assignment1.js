@@ -15,7 +15,7 @@ var fs = require('fs');
      console.log('The HTTP server is running on port '+config.httpPort+' in '+config.envname+' node');
   });
   
-  // Instantiate the HTTPS server
+  // Instantiate and start the HTTPS server
   var httpsServerOptions = {
     'key': fs.readFileSync('D:/https/key.pem'),
     'cert': fs.readFileSync('D:/https/cert.pem')
@@ -29,7 +29,7 @@ var fs = require('fs');
     console.log('The server is up and running now on port '+config.httpsPort+' in '+config.envname+' node');
   });
 
-//unified server
+//unified server function
 var unifiedServer = function(req,res)
 {
     //parse the url
@@ -87,7 +87,7 @@ var unifiedServer = function(req,res)
         res.end(payloadstring);
 
         
-     // Log the request/response
+     // Log the response
      console.log('Request the response: ',statusCode,payloadstring);
 
      });
@@ -99,6 +99,7 @@ handlers.hello= function(data,callback){
  //callback giving status code and msg
     callback(200,{'message': 'Hello world'})   ;
 }
+//not found callback
 handlers.notFound = function(data,callback)
 {
 callback(404);
